@@ -1,0 +1,4 @@
+lighttpd_enable="YES"
+lighttpd_instances="myip"
+lighttpd_myip_conf="/usr/local/etc/lighttpd/myip.conf"
+lighttpd_myip_pidfile="/var/run/lighttpd_myip.pid"
