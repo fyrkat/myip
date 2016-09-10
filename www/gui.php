@@ -192,15 +192,21 @@ ul {
 	margin: 0;
 	padding: 0;
 }
-#primary-ip li.ipv4 {
+#primary-ip li.ipv4 .addr {
 	font-size: .7em;
 }
-li.ipv4:first-child {
+li.ipv4:first-child .addr {
 	font-size: 2em !important;
 	margin: 0;
 }
-li.ipv6 {
-
+li.ipv4 .name:before, li.ipv6 .name:before {
+	content: "(";
+}
+li.ipv4 .name:after, li.ipv6 .name:after {
+	content: ")";
+}
+li.ipv4 .name, li.ipv6 .name {
+	display: block;
 }
 li.webrtc {
 	color: rgba(0,0,0,.75);
@@ -214,7 +220,8 @@ li.webrtc {
 <div id="primary-ip">
 <h1>Primary IP</h1>
 <ul id="primary-ips">
-<li class="ipv<?= $addr->getIPVersion() ?>"><?= $generator->isSpider() ? 'Your IP' : htmlspecialchars($_SERVER['REMOTE_ADDR']) ?>
+<li class="ipv<?= $addr->getIPVersion() ?>">
+<span class="addr"><?= $generator->isSpider() ? 'Your IP' : htmlspecialchars($_SERVER['REMOTE_ADDR']) ?></span>
 </ul>
 </div
 
@@ -253,15 +260,30 @@ li.webrtc {
 
 <?php if(is_null($domain)) return; ?>
 <script type="application/javascript">
-var r = new XMLHttpRequest();
-r.open("GET", "<?= $_SERVER['HTTPS'] ? 'https' : 'http' ?>://v<?= $addr->getOppositeIPVersion() ?>.<?= htmlspecialchars($domain) ?>/", true);
-r.setRequestHeader('Accept', 'text/plain');
+function r(h, p, d) { /* host, path, done */
+	var r = new XMLHttpRequest();
+	r.open("GET", "<?= $_SERVER['HTTPS'] ? 'https' : 'http' ?>://"+h+p, true);
+	r.setRequestHeader('Accept', 'text/plain');
+	r.onreadystatechange = function() {
+		if (r.readyState != 4 || r.status != 200) return;
+		d(r.responseText.trim());
+	};
+	r.send();
+}
+r('<?= $_SERVER['HTTP_HOST'] ?>', '/dns/ptr/', function(t){
+	if(<?= json_encode($_SERVER['REMOTE_ADDR']) ?> == t) return;
+	var l = document.getElementById('primary-ips').childNodes[1];
+	var e = document.createElement('span');
+	e.setAttribute('class', 'name');
+	e.innerHTML = t;
+	l.appendChild(e);
+});
+
 var xhrIP = null;
-r.onreadystatechange = function() {
-	if (r.readyState != 4 || r.status != 200) return;
+r('v<?= $addr->getOppositeIPVersion() ?>.<?= htmlspecialchars($domain) ?>', '/', function(t){
 	var ipElem = document.createElement('li');
 	ipElem.setAttribute('class', 'ipv<?= $addr->getOppositeIPVersion() ?>');
-	xhrIP = r.responseText.trim();
+	xhrIP = t;
 	ipElem.innerHTML = xhrIP;
 	document.getElementById('primary-ips').appendChild(ipElem);
 	var additionalIPs = document.getElementById('additional-ips');
@@ -276,8 +298,7 @@ r.onreadystatechange = function() {
 			}
 		}
 	}
-};
-r.send();
+});
 
 <?php /* get the IP addresses associated with an account */ ?>
 function getIPs(callback){

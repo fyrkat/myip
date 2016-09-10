@@ -62,6 +62,8 @@ abstract class Generator {
 	}
 
 	public function getContentType(): string {
+		if ($this->getFormat() == '*')
+			return $this->getType() . '/plain';
 		return $this->getType() . '/' . $this->getFormat();
 	}
 

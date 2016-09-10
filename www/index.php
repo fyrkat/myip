@@ -15,5 +15,9 @@ if (function_exists('gzencode') && in_array('gzip', $acceptEncoding)) {
 	$out = $generator->__toString();
 }
 header('Content-Length: ' . strlen($out));
+header('Vary: Accept, Accept-Encoding');
+header('Access-Control-Allow-Headers: Accept');
+header('Access-Control-Allow-Methods: GET');
+header('Access-Control-Allow-Origin: *');
 header('Content-Type: ' . $generator->getContentType() . ';charset=' . $generator->getCharset(), true, $generator->getHTTPCode());
 die($out);
