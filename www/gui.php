@@ -192,21 +192,17 @@ ul {
 	margin: 0;
 	padding: 0;
 }
-#primary-ip li.ipv4 .addr {
+#primary-ip li.ipv4 {
 	font-size: .7em;
 }
-li.ipv4:first-child .addr {
+li.ipv4:first-child {
 	font-size: 2em !important;
 	margin: 0;
 }
-li.ipv4 .name:before, li.ipv6 .name:before {
-	content: "(";
-}
-li.ipv4 .name:after, li.ipv6 .name:after {
-	content: ")";
-}
 li.ipv4 .name, li.ipv6 .name {
 	display: block;
+	font-size: .5em;
+	color: #048;
 }
 li.webrtc {
 	color: rgba(0,0,0,.75);
