@@ -283,20 +283,20 @@ function p(h, v, o) { /* host, version, oldIp */
 }
 p(<?= json_encode($_SERVER['HTTP_HOST']) ?>, <?= $addr->getIPVersion() ?>, <?= json_encode($_SERVER['REMOTE_ADDR']) ?>);
 
-var xhrIP = null;
+var x=0;
 r('v<?= $addr->getOppositeIPVersion() ?>.<?= htmlspecialchars($domain) ?>', '/', function(t){
 	var ipElem = document.createElement('li');
 	ipElem.setAttribute('class', 'ipv<?= $addr->getOppositeIPVersion() ?>');
 	var e = document.createElement('span');
 	e.setAttribute('class', 'addr');
-	e.innerHTML = t;
+	e.innerHTML=x=t;
 	ipElem.appendChild(e);
 	document.getElementById('primary-ips').appendChild(ipElem);
 	var additionalIPs = document.getElementById('additional-ips');
 	if(additionalIPs.hasChildNodes()) {
 		var children = additionalIPs.childNodes;
 		for(var i=0;i<children.length;i++) {
-			if (children[i].innerHTML == xhrIP) {
+			if (children[i].innerHTML == t) {
 				additionalIPs.removeChild(children[i]);
 				if (!additionalIPs.hasChildNodes()) {
 					document.getElementById('additional-ip').style['display'] = 'none';
@@ -304,7 +304,7 @@ r('v<?= $addr->getOppositeIPVersion() ?>.<?= htmlspecialchars($domain) ?>', '/',
 			}
 		}
 	}
-	p(<?= json_encode('v' . $addr->getOppositeIPVersion() . '.' . $domain) ?>, <?= $addr->getOppositeIPVersion() ?>, xhrIP);
+	p(<?= json_encode('v' . $addr->getOppositeIPVersion() . '.' . $domain) ?>, <?= $addr->getOppositeIPVersion() ?>, t);
 });
 
 <?php /* get the IP addresses associated with an account */ ?>
@@ -372,7 +372,7 @@ function getIPs(callback){
 };
 
 getIPs(function(ip){
-	if (ip == '<?= $addr->getAddress() ?>' || ip == xhrIP) return;
+	if (ip == '<?= $addr->getAddress() ?>' || ip == x) return;
 	var local = ip.match(/^(f[0-9a-f]{3}:|192\.168\.|169\.254\.|10\.|172\.(1[6-9]|2\d|3[01]))/);
 	var ipElem = document.createElement('li');
 	if (local) {
