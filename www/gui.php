@@ -3,7 +3,7 @@
 	die('404 Not Found');
 } ?><!DOCTYPE html>
 <meta name="description" content="A quick IP viewer that uses less than 5K of traffic">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
 <meta name="format-detection" content="telephone=no">
 <meta name="robots" content="nosnippet,noarchive">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
@@ -251,7 +251,7 @@ li.webrtc {
 </div> */ ?>
 
 <address>
-<span>MyIP by <a href="//jornane.me/">Jørn Åne</a></span> <span>Powered by <a href="//freebsd.org/">FreeBSD</a></span>
+<span>MyIP by <a href="//jornane.me">Jørn Åne</a></span> <span>Powered by <a href="//freebsd.org">FreeBSD</a></span>
 </address>
 
 <?php if(is_null($domain)) return; ?>
