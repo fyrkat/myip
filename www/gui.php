@@ -176,11 +176,11 @@ address {
 	border-top: .1em solid rgba(0,0,0,.1);
 	font-size: .8em;
 	width: 40em;
-	color: rgba(0,0,0,.1);
+	color: rgba(0,0,0,.2);
 	font-style: normal;
 }
 address a {
-	color: rgba(0,0,0,.1);
+	color: rgba(0,0,255,.2);
 }
 address span:after {
 	content: ' | ';
