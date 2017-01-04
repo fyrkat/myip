@@ -14,7 +14,7 @@ abstract class Generator {
 	public static function getGeneratorByAccept(string $accept, IPAddress $address): Generator {
 		foreach(explode(',', $accept) as $contentType) {
 			@list($type, $format, $rest) = explode('/', $contentType);
-			if(!isset($format) || isset($rest)) return new InvalidGenerator;
+			if(!isset($format) || isset($rest)) continue;
 			foreach([$format, 'x-' . $format] as $f) switch($f) {
 				case 'bson': return new BSONGenerator($address, $contentType);
 				case 'dson': return new DSONGenerator($address, $contentType);

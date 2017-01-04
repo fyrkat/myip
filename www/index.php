@@ -5,7 +5,7 @@ use \fyrkat\myip\generator\HTMLGenerator;
 use \fyrkat\myip\generator\InvalidGenerator;
 use \fyrkat\myip\IPAddress;
 
-$generator = Generator::getGeneratorByAccept($_SERVER['HTTP_ACCEPT'], new IPAddress);
+$generator = Generator::getGeneratorByAccept($_SERVER['HTTP_ACCEPT'] ?? '*/*', new IPAddress);
 
 $acceptEncoding = preg_split('/\s*,\s*/', strtolower($_SERVER['HTTP_ACCEPT_ENCODING'] ?? ''));
 if (function_exists('gzencode') && in_array('gzip', $acceptEncoding)) {
