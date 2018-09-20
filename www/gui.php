@@ -263,7 +263,7 @@ li.webrtc {
 
 <?php if(is_null($domain)) return; ?>
 <script type="application/javascript">
-function r(h, p, d) { /* host, path, done */
+function r(h, p, d) { /* ajaxRequest(host, path, done) */
 	var r = new XMLHttpRequest();
 	r.open("GET", "<?= $_SERVER['HTTPS'] ? 'https' : 'http' ?>://"+h+p, true);
 	r.setRequestHeader('Accept', 'text/plain');
@@ -273,7 +273,7 @@ function r(h, p, d) { /* host, path, done */
 	};
 	r.send();
 }
-function p(h, v, o) { /* host, version, oldIp */
+function p(h, v, o) { /* ptr(host, version, oldIp) */
 	r(h, '/dns/ptr/', function(t){
 		if(o == t) return;
 		var c = document.getElementById('primary-ips').childNodes;
@@ -288,10 +288,11 @@ function p(h, v, o) { /* host, version, oldIp */
 		}
 	});
 }
-p(<?= json_encode($_SERVER['HTTP_HOST']) ?>, <?= $addr->getIPVersion() ?>, <?= json_encode($_SERVER['REMOTE_ADDR']) ?>);
+// Get PTR, hostname must use same IP version because in some rare cases the browser will make a new TCP connection for this Ajax request
+p(<?= json_encode('v'.$addr->getIPVersion().'.'.htmlspecialchars($domain)) ?>, <?= $addr->getIPVersion() ?>, <?= json_encode($_SERVER['REMOTE_ADDR']) ?>);
 
 var x=0;
-r('v<?= $addr->getOppositeIPVersion() ?>.<?= htmlspecialchars($domain) ?>', '/', function(t){
+r(<?= json_encode('v'.$addr->getOppositeIPVersion().'.'.htmlspecialchars($domain)) ?>, '/', function(t){
 	var ipElem = document.createElement('li');
 	ipElem.setAttribute('class', 'ipv<?= $addr->getOppositeIPVersion() ?>');
 	var e = document.createElement('span');
