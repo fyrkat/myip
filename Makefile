@@ -4,12 +4,14 @@ myip:
 
 install: myip
 	mkdir -p $(prefix)/www/myip/www/dns/ptr
+	mkdir -p $(prefix)/www/myip/www/ico
 	mkdir -p $(prefix)/www/myip/src/fyrkat/myip/generator
 	install -m 0644 www/*.php $(prefix)/www/myip/www
 	install -m 0644 www/*.png $(prefix)/www/myip/www
 	install -m 0644 www/*.txt $(prefix)/www/myip/www
 	install -m 0644 www/dns/*.php $(prefix)/www/myip/www/dns
 	install -m 0644 www/dns/ptr/*.php $(prefix)/www/myip/www/dns/ptr
+	install -m 0644 www/ico/*.png $(prefix)/www/myip/www/ico
 	install -m 0644 src/*.php $(prefix)/www/myip/src
 	install -m 0644 src/fyrkat/myip/*.php $(prefix)/www/myip/src/fyrkat/myip
 	install -m 0644 src/fyrkat/myip/generator/*.php $(prefix)/www/myip/src/fyrkat/myip/generator
