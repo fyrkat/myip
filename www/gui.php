@@ -6,9 +6,16 @@
 <meta charset="utf-8">
 <meta name="format-detection" content="telephone=no">
 <meta name="robots" content="nosnippet,noarchive">
+<meta name="apple-mobile-web-app-title" content="MyIP">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
 <title>MyIP</title>
 
+<link href="ico/apple-touch-icon.png" rel="apple-touch-icon">
+<link href="ico/apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76">
+<link href="ico/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120">
+<link href="ico/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152">
 <style type="text/css">
 html {
 	font-family: "Avenir", "Gill Sans", sans-serif;
