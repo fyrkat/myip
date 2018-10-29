@@ -23,3 +23,4 @@ freebsdrc: install
 	sysrc lighttpd_instances+="myip"
 	sysrc lighttpd_myip_conf="/usr/local/etc/lighttpd/myip.conf"
 	sysrc lighttpd_myip_pidfile="/var/run/lighttpd_myip.pid"
+	sysrc local_unbound_enable=yes
