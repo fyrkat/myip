@@ -258,7 +258,7 @@ li.webrtc {
 </div> */ ?>
 
 <address>
-<span>MyIP by <a href="//jornane.me">Jørn Åne</a></span> <span>Powered by <a href="//freebsd.org">FreeBSD</a> on <a href="//vultr.com/?ref=7037218-3B">Vultr</a></span>
+<span>MyIP by <a href="//jornane.me">Jørn Åne</a></span> <span>Powered by <a href="//freebsd.org">FreeBSD</a> on <a href="https://www.vultr.com/?ref=7037151">Vultr</a></span>
 </address>
 
 <?php if(is_null($domain)) return; ?>
