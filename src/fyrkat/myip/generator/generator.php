@@ -32,6 +32,7 @@ abstract class Generator {
 	}
 
 	public static function isSpider() {
+		if (!array_key_exists('HTTP_USER_AGENT', $_SERVER)) return false;
 		return strpos($_SERVER['HTTP_USER_AGENT'], 'facebookexternalhit') === 0
 		    || strpos($_SERVER['HTTP_USER_AGENT'], 'compatible; Googlebot/')
 		    || strpos($_SERVER['HTTP_USER_AGENT'], 'compatible; bingbot/')
