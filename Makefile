@@ -17,7 +17,7 @@ install: myip
 	install -m 0644 src/fyrkat/myip/generator/*.php $(prefix)/www/myip/src/fyrkat/myip/generator
 
 freebsdrc: install
-	pkg install -y lighttpd php72-json php72-zlib
+	pkg install -y lighttpd php80-zlib
 	install -m 0644 dist/etc/lighttpd/myip.conf $(prefix)/etc/lighttpd
 	sysrc lighttpd_enable="YES"
 	sysrc lighttpd_instances+="myip"
