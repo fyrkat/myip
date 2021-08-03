@@ -265,7 +265,7 @@ li.webrtc {
 <script type="application/javascript">
 function r(h, p, d) { /* ajaxRequest(host, path, done) */
 	var r = new XMLHttpRequest();
-	r.open("GET", "<?= $_SERVER['HTTPS'] ? 'https' : 'http' ?>://"+h+p, true);
+	r.open("GET", "<?= empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off' ? 'http' : 'https' ?>://"+h+p, true);
 	r.setRequestHeader('Accept', 'text/plain');
 	r.onreadystatechange = function() {
 		if (r.readyState != 4 || r.status != 200) return;
